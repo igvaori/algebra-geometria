@@ -1,0 +1,235 @@
+\PassOptionsToPackage{svgnames}{xcolor} %para los myblock - ha de estar al principio 
+\documentclass[a5paper, 10pt, spanish]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{float} %posicionar figuras
+\usepackage{multicol}
+\usepackage{multirow} % esto hará falta para figuras casi seguro
+\usepackage{amsmath} %ecuaciones bien
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx} %opciones /includegraphics[...]
+\usepackage{indentfirst} % sangria de primera linea
+%\setlength{\parindent}{0cm} %elimino sangrado 1a linea
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{esint} % integrales mejor
+
+\usepackage[top=1.8cm, bottom=1.6cm, left=2cm, right=1.6cm]{geometry} % márgenes (para encuadernado-book: impares más a la izquda, pares más a la dcha.
+\usepackage{comment} % comment environment
+\usepackage{physics}
+\usepackage{enumerate}
+%\usepackage{footnote} 
+%\makesavenoteenv{tabular} 
+%\makesavenoteenv{table}%% write footnotes on tables
+%\setlength{\parskip}{10px} %espacio parrafos error con teoremas
+%\usepackage{verbatim} % comentarios
+\usepackage{comment} % comentarios
+\usepackage{accents}
+\usepackage{pdfpages} %insertar pdfs
+
+\usepackage{ragged2e} % para  \justifying después de fcolorbox-parbox
+
+
+\widowpenalty10000
+\clubpenalty10000
+\setcounter{tocdepth}{3}
+
+%FLOAT EQNS LEFT
+\usepackage{nccmath} 
+\makeatletter
+\newcommand{\leqnomode}{\tagsleft@true}
+\newcommand{\reqnomode}{\tagsleft@false}
+\makeatother
+
+\usepackage{mathtools} %alinear matrices izqda
+%\begin{equation}
+%\begin{pmatrix*}[l]
+%63 & 71 & 2\\
+%6 & 829 & 12\\
+%599 & 9 & 361
+%\end{pmatrix*}
+%\end{equation}
+
+ 
+%% estos comandos van a arreglarme bastante la vida
+%\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2}}
+%\newcommand{\td}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+%\newcommand{\dif}[0]{\mathrm{d}}
+
+%\languagepath{spanish}
+%\uselanguage{spanish}
+%\deftranslation[to=spanish]{Theorem}{Teorema.}
+%\deftranslation[to=spanish]{theorem}{teorema.}
+
+\definecolor{roig}{RGB}{196,49,24}
+\definecolor{morat}{RGB}{131,54,147}
+\definecolor{verd}{RGB}{85,107,47}
+\definecolor{gris}{RGB}{100,100,100}
+\definecolor{blau}{RGB}{0,0,100}
+\definecolor{fondoblau}{RGB}{232,255,255}
+\definecolor{fondoroig}{RGB}{245,194,194}
+\definecolor{fondoverd}{RGB}{209,240,192}
+
+\newcommand{\subrayado}[1]{\colorbox{yellow}{$\displaystyle #1$}} %fosforito ecuaciones begin{eq... 
+
+\newtheorem{lema}{Lema}
+\newtheorem{teor}{Teorema}
+\newtheorem{coro}{Corolario}
+\newtheorem{prop}{Proposición}
+\newtheorem{defi}{Definición}
+\newtheorem{axio}{Axioma}
+\newtheorem{ejem}{Ejemplo}
+\newtheorem{ejre}{Ejercicio resuelto}
+\newtheorem{ejer}{Ejercicio.}
+\newtheorem{ayud}{Ayuda.}
+\newtheorem{solu}{Solución.}
+
+\numberwithin{equation}{chapter}
+\numberwithin{lema}{chapter}
+\numberwithin{teor}{chapter}
+\numberwithin{coro}{chapter}
+\numberwithin{prop}{chapter}
+\numberwithin{defi}{chapter}
+\numberwithin{axio}{chapter}
+\numberwithin{ejem}{chapter}
+\numberwithin{ejre}{chapter}
+\numberwithin{ejer}{chapter}
+\numberwithin{ayud}{chapter}
+\numberwithin{solu}{chapter}
+
+%\usepackage{longtable} % para tablas largas
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{%
+\markboth{\thechapter.\ #1}{}}
+%\newcommand{\TheAuthor}{Ignacio Vallés Oriola} % As given in documentation of **fancyhdr**
+%\newcommand{\Author}[1]{\renewcommand{\TheAuthor}{#1}}
+\fancyhead{} % clear all fields
+
+%\lhead{\leftmark}
+%\rhead{Ignacio Vallés Oriola}
+\fancyhead[LO]{\MakeUppercase{\leftmark}}
+\fancyhead[RE]{\nouppercase{\rightmark}}
+\fancyhead[LE, RO]{Ignacio Vallés Oriola}
+
+%demostraciones sin frase ni punto inicial
+\makeatletter
+\newenvironment{proofw}{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother 
+
+\usepackage{soul} %tachado, usando \textst{lo que se desea tachar} No vale en ecuaciones.
+\usepackage[makeroom]{cancel} % tachar en equaciones \cancel{a tachar}; \bcancel tacha al revés ; \xcancel tacha con x; \cancelto {0 (o \infty}{expresion a tachar} flecha con 0 o infty
+
+
+%%% bloques
+% blocks
+% \PassOptionsToPackage{svgnames}{xcolor}   ---- en primera línea
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+    
+\newenvironment{myexampleblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=Honeydew,colframe=DarkGreen,%
+    colbacklower=LimeGreen!75!Honeydew,%
+    title={#1}]}%
+    {\endtcolorbox}
+
+  
+\newenvironment{myalertblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=LavenderBlush,colframe=DarkRed,%
+    colbacklower=Tomato!75!LavenderBlush,%
+    title={#1}]}%
+    {\endtcolorbox}
+
+\newenvironment{myblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=AliceBlue,colframe=DarkBlue,%
+    colbacklower=DarkBlue!75!AliceBlue,%
+    title={#1}]}%
+    {\endtcolorbox}
+    
+
+
+\renewcommand{\baselinestretch}{1.2} %interlineado
+\setlength{\parskip}{2mm} %espacio entre párrafos
+
+\title{Cálculo infinitesimal en una variable \\ (avanzado) para bachillerato.} 
+%	\\
+% -  \\ 
+%\large{(ampliado)}}
+
+\author{Ignacio Vallés Oriola.}
+\date{}
+
+\setcounter{tocdepth}{2} %hasta segundo nivel secc
+
+%\rotatebox{180}{\leftline{\textcolor{gris}{texto a escribir }}}
+
+% $\divideontimes$ ejercicio difÃ­cil
+
+%\rotatebox{180}{\leftline{\textcolor{gris}{\scriptsize{Sol: $\frac 1 {x^2}$ no está definida en $x0=\in [-3,2]$}}}}. 
+%!!!!!!!Texto escrito de dcha a izqda en cualquier parte del texto.
+
+\setlength{\parindent}{5 mm} %elimina sangrado primera línea
+
+%*************. \boldsymbol{$fórmula en negrita$}
+
+
+% ***********.  numero tachado horizontalmente --  $\text{\textst{5}}$
+\spanishdecimal{.}
+
+
+%\usepackage{enumitem} %para usar \begin{itemize}[noitemsep] eliminando espaciados en lista
+
+%\includeonly{TEMA12_chapter} %para ver solo esto, o separado por comas, varios
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	\vspace*{\fill}
+	{\scshape\LARGE ÁLGEBRA LINEAL Y GEOMETRIA (avanzadas) PARA BACHILLERATO\par}
+	\vspace{1cm}
+	{\Large Ignacio Vallés Oriola \par}
+	\vspace{3cm}
+	\includegraphics[width=0.75\textwidth]{imagenes/hic-svnt-dracones}
+	\vspace{3cm}
+\end{titlepage}
+
+\tableofcontents
+
+\include{TEMA00_chapter}
+\include{TEMA01_chapter}
+\include{TEMA02_chapter}
+\include{TEMA03_chapter}
+\include{TEMA04_chapter}
+\include{TEMA05_chapter}
+\include{TEMA06_chapter}
+\include{TEMA07_chapter}
+\include{TEMA08_chapter}
+\include{TEMA09_chapter}
+\include{TEMA10_chapter}
+\include{TEMA11_chapter}
+\include{TEMA12_chapter}
+
+\appendix
+\include{APENDICES}
+		
+\end{document}

@@ -1,0 +1,11 @@
+.DS_Store
+.texpadtmp
+*.pdf
+*.pdfBACK
+*.texBACK
+DOCUMENTACION
+*.zip
+IMPRENTA
+*.pages
+*.ggb
+!ALGEBRA-LINEAL-Y-GEOMETRIA-A5.pdf
